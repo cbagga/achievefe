@@ -1,0 +1,97 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<div class="container">  
+    
+  <form [formGroup]="EmpForm" (ngSubmit)="this[EventValue]()">  
+      
+      <h3>Employee Table CRUD Operation</h3>  
+      <div class="row">  
+           
+      <table class="table">  
+      <tr>  
+        <td>Name</td>  
+        <td>  
+          <input type="hidden" formControlName="empId">  
+          <input type="text" formControlName="empName">  
+          <div *ngIf="submitted && EmpForm.controls.empName.errors" class="text-danger">  
+            <div *ngIf="EmpForm.controls.empName.errors.required">Name is required</div>  
+          </div>   
+        </td>  
+      </tr>  
+        
+      <tr>  
+        <td>Contact</td>  
+        <td><input type="text" formControlName="empContact">  
+          <div *ngIf="submitted && EmpForm.controls.empContact.errors" class="text-danger">  
+            <div *ngIf="EmpForm.controls.empContact.errors.required">Contact is required</div>  
+          </div>   
+        </td>  
+      </tr>  
+      <tr>  
+        <td>Email</td>  
+        <td>  
+          <input type="text" formControlName="empEmail">  
+          <div *ngIf="submitted && EmpForm.controls.empEmail.errors" class="text-danger">  
+            <div *ngIf="EmpForm.controls.empEmail.errors.required">Email is required</div>  
+          </div>  
+        </td>  
+      </tr>  
+      <tr>  
+        <td>Address</td>  
+        <td>  
+          <input type="text" formControlName="empAddress">  
+          <div *ngIf="submitted && EmpForm.controls.empAddress.errors" class="text-danger">  
+            <div *ngIf="EmpForm.controls.empAddress.errors.required">Address is required</div>  
+          </div>  
+            
+        </td>  
+      </tr>  
+      <tr>  
+    
+        <td colspan="2">  
+          <button type="submit" class="btn btn-primary">{{EventValue}}</button>  
+        </td>  
+      </tr>  
+        
+    </table>  
+    </div>  
+       
+   <div class="row">  
+    <table class="table table-striped">  
+      <tr>  
+        <td>Id</td>  
+        <td>Name</td>  
+          
+        <td>Contact</td>  
+        <td>Email</td>  
+        <td>Address</td>  
+        <td>Edit</td>  
+        <td>Delete</td>  
+      </tr>  
+    
+      <tr *ngFor="let d of data">  
+        <td>{{d.empId}}</td>  
+        <td>{{d.empName}}</td>  
+         
+        <td>{{d.empContact}}</td>  
+        <td>{{d.empEmail}}</td>  
+        <td>{{d.empAddress}}</td>  
+        <td><a (click)="EditData(d)" class="btn btn-warning">Edit</a></td>  
+        <td><a (click)="deleteData(d.empId)" class="btn btn-danger">Delete</a></td>    
+      </tr>  
+    </table>  
+  </div>  
+  </form>  
+    
+  </div> 
+   
+   
+ 
+   
