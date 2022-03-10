@@ -18,6 +18,9 @@ export class EmployeeComponent {
   
   ngOnInit(): void {  
     this.getdata();  
+
+    console.log("after get data") ;
+    console.log(this.data) ;
   
     this.EmpForm = new FormGroup({  
       empId: new FormControl(null),  
@@ -25,11 +28,17 @@ export class EmployeeComponent {
       empContact: new FormControl("",[Validators.required]),  
       empEmail:new FormControl("",[Validators.required]),  
       empAddress: new FormControl("",[Validators.required]),  
-    })    
+    })   
+    console.log(this.data) ;
+    alert("waiting") ;
   }  
   getdata() {  
+   console.log("in get data") ;
     this.ServiceService.getData().subscribe((data: any) => {  
+      console.log("made service call...waiting for data")
       this.data = data;  
+      console.log("set data variable")
+      console.log(this.data)
     })  
   }  
   deleteData(id) {  

@@ -10,28 +10,26 @@
 <div class="container-fluid" >
   
   <div class="row" >
-    <div class="width-100"></div> 
-    <div class="width-100"></div> 
-    <div class="width-100"></div> 
+   
     <div class="col-sm-2">
       
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-light bg-light">
    
       <div class="navbar-header">
         <a class="navbar-brand" [routerLink]="['/']"><strong> {{title}} </strong></a>
         <ul class="nav navbar-nav">
-          <li><a [routerLink]="['home']">Home</a></li>
-          <li><a [routerLink]="['product']">Product</a></li>
-          <li><a [routerLink]="['contact']">Contact us</a></li>
-          <li><a [routerLink]="['employee']">Employee</a></li>
+          <li class="nav-item"><a class="nav-link" [routerLink]="['home']">Home</a></li>
+          <li class="nav-item "><a class="nav-link" [routerLink]="['product']">Product</a></li>
+          <li class="nav-item "><a class="nav-link" [routerLink]="['contact']">Contact us</a></li>
+          <li class="nav-item "><a class="nav-link" [routerLink]="['employee']">Employee</a></li>
+          <li class="nav-item "><a class="nav-link" [routerLink]="['outwire']">Send Wire</a></li>
       </ul>
+     
       </div>
-      
-    
-  </nav>
-    </div>
+      </nav>
+    </div>   
     <div class="col-sm"><router-outlet></router-outlet></div>
-  </div>
+  
  
 </div>
    
