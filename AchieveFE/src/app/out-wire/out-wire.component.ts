@@ -20,7 +20,7 @@ export class OutWireComponent implements OnInit {
   bankdata:any ;
   outwiredata:any ;
   wiredata:any ;
-   today = new Date() ;
+   today = this.getCurrentDate(new Date()) ;
 
   ngOnInit(): void {
 
@@ -76,11 +76,7 @@ export class OutWireComponent implements OnInit {
      console.log("show it again" + this.bankdata) ;
    }  
 
- 
-
- 
-
-  Save(){
+   Save(){
     /* post the data to save the outgoing wire info*/
    let bankaccountidnumeric :number ;
    let wiredateDate:any ;
@@ -117,4 +113,15 @@ export class OutWireComponent implements OnInit {
     this.EventValue = "Save";  
     this.submitted = false;   
   }  
+
+  getCurrentDate(fulldate:Date):string
+  {
+      /* get month, day, and year from the passed in date and time and return as a string */
+      let mnth:String = (fulldate.getUTCMonth() + 1).toString() ;
+      let day:string = fulldate.getDate().toString() ;
+      let year:string = fulldate.getFullYear().toString() ;
+
+      return mnth + "/" + day +"/" +  year ;
+
+  }
 }
