@@ -1,0 +1,127 @@
+
+<div class="container">  
+  
+    <form [formGroup]="outwireform" (ngSubmit)="this[EventValue]()">  
+      
+        <div class="row gx-5">  
+          
+          <div class="col-sm-5">
+            <div class="row">
+              <nav class="navbar navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1">Enter wire details</span>
+              </nav>  
+            </div>
+            
+          <label for="bankaccount">Bank Account</label>
+          <div class="input-group mb-3">
+            
+            <select formControlName="bankaccountid" id="bankaccount" type="number" aria-describedby="basic-addon3">
+              <option *ngFor="let d of bankdata" [ngValue]="d.accountID">
+                {{d.name}}</option>
+               
+              
+            </select>
+            </div>
+          <label for="recipientname">Recipient Name</label>
+          <div class=" col-sm-4">
+            
+            <input type="text" class="form-control" id="recipientname" aria-describedby="basic-addon3" formControlName="recipientname">
+            <div *ngIf="submitted && outwireform.controls.recipientname.errors" class="text-danger">  
+              <div *ngIf="outwireform.controls.recipientname.errors.required">Recipient Name is required</div>  
+            </div>  
+          </div>
+          <label for="recipientaddress">Recipient Address </label>
+          <div class="col-sm-6">
+              <input type="text" class="form-control" id="address" aria-label="street address" formControlName="recipientaddress">
+              <div *ngIf="submitted && outwireform.controls.recipientaddress.errors" class="text-danger">  
+                <div *ngIf="outwireform.controls.recipientaddress.errors.required">Recipient Address is required</div>  
+              </div>  
+          </div>
+          <label for="city">City </label>
+          <div class="col-sm-4">
+           
+              <input type="text" class="form-control" id="city" aria-label="city" formControlName="recipientcity" >
+              <div *ngIf="submitted && outwireform.controls.recipientcity.errors" class="text-danger">  
+                <div *ngIf="outwireform.controls.recipientcity.errors.required">Recipient city is required</div>  
+              </div> 
+          </div>
+          <label for="state">State </label>
+          <div class="col-sm-4">
+           
+              <input type="text" class="form-control" id="state" aria-label="state" >
+          </div>
+          <label for="zip">Zip </label>
+          <div class="col-sm-4">
+           
+              <input type="text" class="form-control" id="zip" aria-label="zip" >
+          </div>
+          <label for="wireamount">Wire Amount</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input type="number" id="wireamount" class="form-control" aria-label="Amount (to the nearest dollar)" formControlName="amount" >
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+
+          <label for="wiredate">Wire Date</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input type="date" id="wiredate" class="form-control" aria-label="Amount (to the nearest dollar)" formControlName="wiredate" >
+            <div class="input-group-append">
+              <span class="input-group-text">mm/dd/yyyy</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+
+            <div class="col-sm-2">
+            <button type="submit" id="wireamount" class="form-control btn btn-success" aria-label="Amount (to the nearest dollar)">
+              {{EventValue}}</button>
+            </div>
+          </div>
+       
+          
+                
+
+        </div>
+        <div class="col-sm-7">
+          <div class="row">
+          <nav class="navbar navbar-light bg-light">
+              <span class="navbar-brand mb-0 h1">Wires sent today: {{today}}</span>
+            </nav>
+          </div>
+       
+          <table class="table table-striped">  
+            <tr>  
+              <td>Id</td>  
+              <td>Account</td>
+              <td>Amount</td>
+              <td>Recipient Name</td>  
+              <td>Recipient Address</td>  
+                
+            </tr>  
+          
+            <tr *ngFor="let d of outwiredata">  
+              <td class="btn btn-warning">{{d.id}}</td>  
+              <td>{{d.bankAccountID}}</td>  
+              <td>{{d.amount}}</td>  
+              <td>{{d.recipientName}}</td>  
+              <td>{{d.recipientAddress}}</td>  
+               
+            </tr>  
+          </table>  
+        </div>
+      </div>  
+      </form>
+</div>
+
+
+
+
+
+
