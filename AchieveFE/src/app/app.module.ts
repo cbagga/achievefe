@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
  
 import { FormGroup, FormControl,Validators } from '@angular/forms'; 
 
-
-  
 import { AppComponent } from './app.component';  
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';  
 import { HttpClientModule }    from '@angular/common/http';  
@@ -19,12 +17,11 @@ import { EmployeeComponent } from './employee.component';
 import { OutWireComponent } from './out-wire/out-wire.component';
 import { BankaccountService } from './bankaccount.service';
 import { OutwireService } from './outwire.service';
-
-
-
-
- 
+import { fakeBackendProvider } from './_helpers';
 import { ProductService } from './product.service';
+import { LoginComponent } from './login.component';
+import {AuthService} from './auth.service'
+
 
  
 /*import { appRoutes } from './app.routes';*/
@@ -32,7 +29,7 @@ import { ProductService } from './product.service';
 
 @NgModule({  
   declarations: [  
-    AppComponent,HomeComponent,ContactComponent,ProductComponent,EmployeeComponent, OutWireComponent ],  
+    AppComponent,HomeComponent,ContactComponent,ProductComponent,EmployeeComponent, OutWireComponent, LoginComponent ],  
   imports: [  
     BrowserModule,  
     FormsModule,  
@@ -42,7 +39,7 @@ import { ProductService } from './product.service';
    RouterModule
   
   ],  
-  providers: [ServiceService,ProductService,BankaccountService,OutwireService],  
+  providers: [ServiceService,ProductService,BankaccountService,OutwireService,fakeBackendProvider,AuthService],  
   bootstrap: [AppComponent]  
 })  
 export class AppModule { } 

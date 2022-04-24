@@ -14,7 +14,7 @@ export class OutwireService {
     })  
   } 
   
-  serviceURL: string = "http://localhost:5000" ;
+  serviceURL: string = "http://localhost:44379" ;
   getData(){  
        
     return this.http.get('/api/OutWire');  //https://localhost:44352/ webapi host url  

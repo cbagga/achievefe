@@ -9,14 +9,16 @@ import {AuthGuard} from './auth.guard' ;
 /* todo fix this */
 /*import { ErrorComponent} from './error.component'*/
 import { EmployeeComponent} from './employee.component';
+import { LoginComponent } from './login.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'product', component: ProductComponent },
+  { path: 'product', component: ProductComponent,canActivate:[AuthGuard] },
   {path: 'employee', component: EmployeeComponent },
   {path: 'outwire', component: OutWireComponent, canActivate:[AuthGuard] },
+  {path: 'login', component: LoginComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: HomeComponent }
