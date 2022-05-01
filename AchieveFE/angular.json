@@ -70,12 +70,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+
           "configurations": {
             "production": {
               "browserTarget": "AchieveFE:build:production"
             },
             "development": {
-              "browserTarget": "AchieveFE:build:development"
+              "browserTarget": "AchieveFE:build:development",
+              "proxyConfig": "proxy.conf.json"
+              
             }
           },
           "defaultConfiguration": "development"
