@@ -1,3 +1,5 @@
+<div class="row ">
+<div class="col-sm-6 border border-warning p-2">
 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 <h2>Login</h2>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -15,7 +17,7 @@
             <div *ngIf="f.password.errors.required">Password is required</div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-2">
         <button [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Login
@@ -23,3 +25,5 @@
         <a routerLink="/register" class="btn btn-link">Register</a>
     </div>
 </form>
+</div>
+</div>
