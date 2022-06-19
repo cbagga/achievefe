@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@syncfusion/ej2-angular-grids": "^20.1.58"
+  }
+}

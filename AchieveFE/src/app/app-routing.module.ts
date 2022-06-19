@@ -5,6 +5,7 @@ import { ContactComponent} from './contact.component';
 import { ProductComponent} from './product.component';
 import { OutWireComponent } from './out-wire/out-wire.component';
 import {AuthGuard} from './auth.guard' ;
+import { MyGridComponent } from './my-grid.component';
 
 /* todo fix this */
 /*import { ErrorComponent} from './error.component'*/
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'product', component: ProductComponent,canActivate:[AuthGuard] },
   {path: 'employee', component: EmployeeComponent },
+  {path: 'mygrid', component: MyGridComponent },
   {path: 'outwire', component: OutWireComponent, canActivate:[AuthGuard] },
   {path: 'login', component: LoginComponent },
 

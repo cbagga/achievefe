@@ -96,6 +96,7 @@
             </nav>
           </div>
        
+          <!-- bootstrap grid
           <table class="table table-striped">  
             <tr>  
               <td>Id</td>  
@@ -115,7 +116,26 @@
                
             </tr>  
           </table>  
-        </div>
+          -->
+         <div class="row gx-5 mt-5">
+          
+          
+           <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">grid powered by syncfusion </span>
+          </nav> 
+          <!--sync fusion grid-->
+          <ejs-grid [dataSource]='outwiredata'  [allowPaging]="true"  [allowSorting]="true"       [allowFiltering]="true"  [pageSettings]='pageSettings'>
+            <e-columns>
+              <e-column field='id' headerText='ID' textAlign='Right' width=90 ></e-column>
+              <e-column field='bankAccountID' headerText='Account' width=120></e-column>
+              <e-column field='amount' headerText='Amount' textAlign='Right' format='C2' width=90></e-column>
+              <e-column field='recipientName' headerText='Recipient Name' textAlign='Right'  width=120></e-column>
+              <e-column field='recipientAddress' headerText='Recipient Address' textAlign='Right'  width=120></e-column>
+            </e-columns>
+              </ejs-grid>
+           
+           </div>
+            </div>
       </div>  
       </form>
 </div>

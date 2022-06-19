@@ -20,7 +20,13 @@ import { OutwireService } from './outwire.service';
 import { fakeBackendProvider } from './_helpers';
 import { ProductService } from './product.service';
 import { LoginComponent } from './login.component';
-import {AuthService} from './auth.service'
+import {AuthService} from './auth.service' ;
+import { FilterService, GridModule, GroupService, PageService, SortService } from '@syncfusion/ej2-angular-grids';
+import { MyGridComponent } from './my-grid.component';
+/*Imported syncfusion Grid module from grids package
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+/* import syncfusion services to support grid features 
+import { PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
 
 
  
@@ -29,17 +35,18 @@ import {AuthService} from './auth.service'
 
 @NgModule({  
   declarations: [  
-    AppComponent,HomeComponent,ContactComponent,ProductComponent,EmployeeComponent, OutWireComponent, LoginComponent ],  
+    AppComponent,HomeComponent,ContactComponent,ProductComponent,EmployeeComponent, OutWireComponent, LoginComponent, MyGridComponent ],  
   imports: [  
     BrowserModule,  
     FormsModule,  
     ReactiveFormsModule,  
     HttpClientModule ,
    AppRoutingModule,
-   RouterModule
+   RouterModule,
+  GridModule
   
   ],  
-  providers: [ServiceService,ProductService,BankaccountService,OutwireService,fakeBackendProvider,AuthService],  
+  providers: [ServiceService,ProductService,BankaccountService,OutwireService,fakeBackendProvider,AuthService,FilterService,PageService,SortService,GroupService],
   bootstrap: [AppComponent]  
 })  
 export class AppModule { } 

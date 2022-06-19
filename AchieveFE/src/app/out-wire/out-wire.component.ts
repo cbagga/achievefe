@@ -3,6 +3,7 @@ import { BankaccountService } from '../bankaccount.service';
 import { OutwireService } from '../outwire.service';
 import { FormGroup, FormControl,Validators } from '@angular/forms'; 
 import { ForwardRefHandling } from '@angular/compiler';
+import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class OutWireComponent implements OnInit {
   bankdata:any ;
   outwiredata:any ;
   wiredata:any ;
-   today = this.getCurrentDate(new Date()) ;
+  today = this.getCurrentDate(new Date()) ;
+  pageSettings = { pageSize: 10 };
 
   ngOnInit(): void {
 
