@@ -1,0 +1,235 @@
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Approve wires </span>
+  </nav> 
+  
+  <!--sync fusion grid-->
+   <ejs-grid [dataSource]='wiredata'  [allowPaging]="true"  [allowSorting]="true"       [allowFiltering]="true"  
+  [pageSettings]='pageSettings' [editSettings]='editSettings' [toolbar]='toolbar' 
+  [filterSettings]='filterOptions'  (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'  >
+    <e-columns>
+      <e-column field='disbursementId' headerText='ID' textAlign='Right' width=90 isPrimaryKey='true' ></e-column>
+      <e-column field='wireAutomation.draftedBy' headerText='Drafted By' width=120></e-column>
+      <e-column field='wireAutomation.draftedOn' headerText='Drafted On' width=120></e-column>
+      <e-column field='bankAccount.accountNumber' headerText='Account Number' width=120 isPrimaryKey='true'></e-column>
+      <e-column field='bankAccount.shortDisplayName' headerText='Account Name' width=120></e-column>
+      <e-column field='bankAccount.bank.name' headerText='Bank Name' width=120></e-column>
+    <e-column field='amount' headerText='Amount' textAlign='Right' format='C2' width=90></e-column>
+      <e-column field='cashOut.dateIssued' headerText='Date Issued' width=120></e-column>
+      <e-column field='cashOut.disbursementNumber' headerText='Disbursement Number' width=100></e-column>
+      <e-column field='payee' headerText='Payee' width=120></e-column>
+     
+    </e-columns>
+
+    <ng-template #editSettingsTemplate let-data>
+      <div [formGroup]="wireForm">
+          <div class="row">
+            <div class="p-2  bg-light border">Wire details</div>
+              <div class="form-group col-md-4">
+                  <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Account.invalid && (Account.dirty || Account.touched)}">
+                      <input formControlName="Account" data-msg-containerid='AccountError' id="Account" name="Account" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                      <span class="e-float-line"></span>
+                      <label class="e-float-text e-label-top" for="Account"> Account</label>
+                  </div>
+                  <div id="AccountError" [style.visibility]='((Account.invalid && (Account.dirty || Account.touched)) || (Account.invalid && submitClicked))? "visible": "hidden"'>
+                      <label class="e-error" for="Account" id="Account-info" style="display: block;">*Account is required</label>
+                  </div>
+              </div>
+
+              <div class="form-group  col-md-4">
+                <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': AccountName.invalid && (AccountName.dirty || AccountName.touched)}">
+                    <input formControlName="AccountName" data-msg-containerid='AccountNameError' id="AccountName" name="AccountName" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                    <span class="e-float-line"></span>
+                    <label class="e-float-text e-label-top" for="AccountName">Account Name</label>
+                </div>
+                <div id="AccountNameError" [style.visibility]='((AccountName.invalid && (AccountName.dirty || AccountName.touched)) || (AccountName.invalid && submitClicked))? "visible": "hidden"'>
+                    <label class="e-error" for="AccountName" id="AccountName-info" style="display: block;">*Account Name is required</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Bank.invalid && (Bank.dirty || Bank.touched)}">
+                  <input formControlName="Bank" data-msg-containerid='BankError' id="Bank" name="Bank" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="Bank">Bank</label>
+              </div>
+              <div id="BankError" [style.visibility]='((Bank.invalid && (Bank.dirty || Bank.touched)) || (Bank.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="Bank" id="Bank-info" style="display: block;">Bank Name is required</label>
+              </div>
+          </div>
+              
+          </div>
+          <div class="row">
+           
+            <div class="form-group col-md-4">
+                <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Amount.invalid && (Amount.dirty || Amount.touched)}">
+                    <input formControlName="Amount" data-msg-containerid='AmountError' id="Amount" name="Amount" type="number" [attr.disabled]="!data.isAdd ? '' : null">
+                    <span class="e-float-line"></span>
+                    <label class="e-float-text e-label-top" for="Amount"> Amount</label>
+                </div>
+                <div id="AmountError" [style.visibility]='((Amount.invalid && (Amount.dirty || Amount.touched)) || (Amount.invalid && submitClicked))? "visible": "hidden"'>
+                    <label class="e-error" for="Amount" id="Amount-info" style="display: block;">*Amount is required</label>
+                </div>
+            </div>
+            <div class="form-group col-md-8">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': payee.invalid && (payee.dirty || payee.touched)}">
+                  <input formControlName="payee" data-msg-containerid='PayeeError' id="payee" name="payee" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="payee"> Payee</label>
+              </div>
+              <div id="PayeeError" [style.visibility]='((payee.invalid && (payee.dirty || payee.touched)) || (payee.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="payee" id="Payee-info" style="display: block;">*Payee is required</label>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+           
+            <div class="form-group col-md-4">
+                <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': DateIssued.invalid && (DateIssued.dirty || DateIssued.touched)}">
+                    <input formControlName="DateIssued" data-msg-containerid='DateIssuedError' id="DateIssued" name="DateIssued" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                    <span class="e-float-line"></span>
+                    <label class="e-float-text e-label-top" for="DateIssued"> Date Issued</label>
+                </div>
+                <div id="DateIssuedError" [style.visibility]='((DateIssued.invalid && (DateIssued.dirty || DateIssued.touched)) || (DateIssued.invalid && submitClicked))? "visible": "hidden"'>
+                    <label class="e-error" for="DateIssued" id="DateIssued-info" style="display: block;">*DateIssued is required</label>
+                </div>
+            </div>
+            <div class="form-group col-md-8">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': DisbursementNumber.invalid && (DisbursementNumber.dirty || DisbursementNumber.touched)}">
+                  <input formControlName="DisbursementNumber" data-msg-containerid='DisbursementNumberError' id="DisbursementNumber" name="DisbursementNumber" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="DisbursementNumber"> Disbursement Number</label>
+              </div>
+              <div id="DisbursementNumberError" [style.visibility]='((DisbursementNumber.invalid && (DisbursementNumber.dirty || DisbursementNumber.touched)) || (DisbursementNumber.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="DisbursementNumber" id="DisbursementNumber-info" style="display: block;">*DisbursementNumber is required</label>
+              </div>
+          </div>
+        </div>
+           <!-- WIRE INSTRUCTIONS-->
+           <div class="row">
+            <div class="p-2  bg-light border">Wire Instructions</div>
+            <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Customer.invalid && (Customer.dirty || Customer.touched)}">
+                  <input formControlName="Customer" data-msg-containerid='CustomerError' id="Customer" name="Customer" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="Customer"> Customer ID</label>
+              </div>
+              <div id="CustomerError" [style.visibility]='((Customer.invalid && (Customer.dirty || Customer.touched)) || (Customer.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="Customer" id="Customer-info" style="display: block;">*Customer is required</label>
+              </div>
+          </div>
+          <div class="form-group col-md-4">
+            <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': sendToName.invalid && (sendToName.dirty || sendToName.touched)}">
+                <input formControlName="sendToName" data-msg-containerid='sendToNameError' id="sendToName" name="sendToName" type="text" [attr.disabled]="!data.isAdd ? '' : null" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="sendToName">Send To</label>
+            </div>
+            <div id="sendToNameError" [style.visibility]='((sendToName.invalid && (sendToName.dirty || sendToName.touched)) || (sendToName.invalid && submitClicked))? "visible": "hidden"'>
+                <label class="e-error" for="SendTo" id="sendToName-info" style="display: block;">*Send to name is required</label>
+            </div>
+        </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Address1.invalid && (Address1.dirty || Address1.touched)}">
+                  <input formControlName="Address1" data-msg-containerid='Address1Error' id="Address1" name="Address1" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="Address1">Address 1</label>
+              </div>
+              <div id="Address1Error" [style.visibility]='((Address1.invalid && (Address1.dirty || Address1.touched)) || (Address1.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="Address1" id="Address1-info" style="display: block;">*Address line one is required</label>
+              </div>
+          </div>
+         
+            <div class="form-group col-md-6">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Address2.invalid && (Address2.dirty || Address2.touched)}">
+                  <input formControlName="Address2" data-msg-containerid='Address2Error' id="Address2" name="Address2" type="text" [attr.disabled]="!data.isAdd ? '' : null" >
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="Address2">Address 2</label>
+              </div>
+              <div id="Address2Error" [style.visibility]='((Address2.invalid && (Address2.dirty || Address2.touched)) || (Address2.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="Address2" id="Address2-info" style="display: block;">*Address line two is required</label>
+              </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': City.invalid && (City.dirty || City.touched)}">
+                  <input formControlName="City" data-msg-containerid='CityError' id="City" name="City" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="City">City</label>
+              </div>
+              <div id="CityError" [style.visibility]='((City.invalid && (City.dirty || City.touched)) || (City.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="City" id="City-info" style="display: block;">*City is required</label>
+              </div>
+            </div>
+          
+          <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': State.invalid && (State.dirty || State.touched)}">
+                  <input formControlName="State" data-msg-containerid='StateError' id="State" name="State" type="text" [attr.disabled]="!data.isAdd ? '' : null" >
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="State">State</label>
+              </div>
+              <div id="StateError" [style.visibility]='((State.invalid && (State.dirty || State.touched)) || (State.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="State" id="State-info" style="display: block;">*State is required</label>
+              </div>
+          </div>
+          <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': Zip.invalid && (Zip.dirty || Zip.touched)}">
+                  <input formControlName="Zip" data-msg-containerid='ZipError' id="City" name="Zip" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="Zip">Zip</label>
+              </div>
+              <div id="ZipError" [style.visibility]='((Zip.invalid && (Zip.dirty || Zip.touched)) || (Zip.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="Zip" id="Zip-info" style="display: block;">*Zip is required</label>
+              </div>
+          </div>
+        
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': ABA.invalid && (ABA.dirty || ABA.touched)}">
+                  <input formControlName="ABA" data-msg-containerid='ABAError' id="ABA" name="ABA" type="text" [attr.disabled]="!data.isAdd ? '' : null" >
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="ABA">ABA Number</label>
+              </div>
+              <div id="ABAError" [style.visibility]='((ABA.invalid && (ABA.dirty || ABA.touched)) || (ABA.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="ABA" id="ABA-info" style="display: block;">*ABA is required</label>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <div class="e-float-input e-control-wrapper" [ngClass]="{'e-error': SendToAccount.invalid && (SendToAccount.dirty || SendToAccount.touched)}">
+                  <input formControlName="SendToAccount" data-msg-containerid='SenEdToAccountError' id="SendToAccount" name="SendToAccount" type="text" [attr.disabled]="!data.isAdd ? '' : null">
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="SendToAccount">Send to Account Number</label>
+              </div>
+              <div id="SendToAccountError" [style.visibility]='((SendToAccount.invalid && (SendToAccount.dirty || SendToAccount.touched)) || (SendToAccount.invalid && submitClicked))? "visible": "hidden"'>
+                  <label class="e-error" for="SendToAccount" id="SendToAccount-info" style="display: block;">*Send to account number is required</label>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="p-2  bg-light border">Wire Disposition </div>
+              <div class="form-group ">
+                <div class="e-float-input e-control-wrapper" >
+                    <label  class="e-label-top"  for="CashOutStatus">Disposition</label>
+               
+                <select formControlName="CashOutStatus" id="CashOutStatus" name="CashOutStatus" type="number" aria-describedby="basic-addon3">
+                  <option *ngFor="let d of disposition" [ngValue]="d.status">
+                    {{d.status}}</option>
+                   
+                  
+                </select>
+                <span class="e-float-line"></span>
+               
+                </div>
+              </div>
+             
+   
+            </div>
+            
+      </div>
+        </ng-template>
+
+    
+      </ejs-grid>
+   

@@ -11,7 +11,7 @@ import { FormGroup, FormControl,Validators } from '@angular/forms'; **/
   styleUrls: ['./app.component.scss']  
 })  
 export class AppComponent {  
-  title = 'Achieve Systems';  
+  title = 'Achieve Wire Transfer';  
   currentUser:any ;
   constructor(
     private router:Router,

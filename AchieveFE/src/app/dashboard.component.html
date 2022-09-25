@@ -1,0 +1,46 @@
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Activity Center</span>
+  </nav> 
+  <div class="control-section">
+  <!--sync fusion grid-->
+   <ejs-grid [dataSource]='wiredata'  [allowPaging]="true"  [allowSorting]="true"       [allowFiltering]="true"  
+  [pageSettings]='pageSettings'  [filterSettings]='filterOptions' [allowTextWrap]='true'  
+  enableStickyHeader=true  width='auto' [childGrid]='wireinstructions'>
+    <e-columns>
+     
+      <e-column field='disbursementId' headerText='ID'  width=90 isPrimaryKey='true' ></e-column>
+    
+      <!--show appropriate status  from cashout(disbursed) or wireautomation(approved/rejected/drafted)-->
+        <e-column  headerText='Status' width=120 [allowFiltering] = 'true'  >
+          <ng-template #template  let-wiredata >
+            <div  *ngIf = "wiredata.wireAutomation ==null" class="btn-secondary" >
+              {{wiredata.cashOut.cashOutStatus.displayName}}
+            </div>
+            <div  *ngIf = "wiredata.wireAutomation !=null && wiredata.wireAutomation.draftedBy >0 && wiredata.wireAutomation.reviewedBy==null" class="btn-warning" >
+              {{"DRAFTED"}}
+            </div>
+            <div  *ngIf = "wiredata.wireAutomation !=null  && wiredata.wireAutomation.reviewedBy!=null && wiredata.wireAutomation.approvedOn != null" class="btn-success" >
+              {{"APPROVED"}}
+            </div>
+            <div  *ngIf = "wiredata.wireAutomation !=null  && wiredata.wireAutomation.reviewedBy!=null && wiredata.wireAutomation.rejectedOn != null" class="btn-danger" >
+              {{"REJECTED"}}
+            </div>
+           
+        </ng-template>
+      </e-column>
+  
+        
+    
+   
+      <e-column field='cashOut.bankAccount.accountNumber' headerText='Account Number' width=120 ></e-column>
+      <e-column field='cashOut.bankAccount.shortDisplayName' headerText='Account Name' width=120></e-column>
+      <e-column field='cashOut.bankAccount.bank.name' headerText='Bank Name' width=120></e-column>
+      <e-column field='cashOut.amount' headerText='Amount' textAlign='Right' format='C2' width=120></e-column>
+      <e-column field='cashOut.dateIssued' headerText='Date Issued' format= 'mDy' width=120></e-column>
+      <e-column field='cashOut.disbursementNumber' headerText='Disbursmnt Number' width=130></e-column>
+          
+     
+    </e-columns>
+     
+</ejs-grid>
+</div>

@@ -11,10 +11,17 @@ import { MyGridComponent } from './my-grid.component';
 /*import { ErrorComponent} from './error.component'*/
 import { EmployeeComponent} from './employee.component';
 import { LoginComponent } from './login.component';
+import { DraftwireComponent } from './draftwire.component';
+import { ApprovewireComponent } from './approvewire.component';
+import { DashboardComponent } from './dashboard.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'draftwire', component: DraftwireComponent },
+  { path: 'approvewire', component: ApprovewireComponent },
+
   { path: 'contact', component: ContactComponent },
   { path: 'product', component: ProductComponent,canActivate:[AuthGuard] },
   {path: 'employee', component: EmployeeComponent },

@@ -1,0 +1,132 @@
+
+
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Draft wires </span>
+  </nav> 
+  <!--sync fusion grid-->
+   <ejs-grid [dataSource]='wiredata'  [allowPaging]="true"  [allowSorting]="true"       [allowFiltering]="true"  
+  [pageSettings]='pageSettings' [editSettings]='editSettings' [toolbar]='toolbar' 
+  [filterSettings]='filterOptions'  (actionBegin)='actionBegin($event)' (actionComplete)='actionComplete($event)'  >
+    <e-columns>
+      <e-column field='cashOutid' headerText='ID' textAlign='Right' width=90 isPrimaryKey='true' ></e-column>
+      <e-column field='bankAccount.accountNumber' headerText='Account Number' width=120 isPrimaryKey='true'></e-column>
+      <e-column field='bankAccount.shortDisplayName' headerText='Account Name' width=120></e-column>
+      <e-column field='bankAccount.bank.name' headerText='Bank Name' width=120></e-column>
+      <e-column field='cashOutStatus.displayName' headerText='Status' width=120></e-column>
+      <e-column field='amount' headerText='Amount' textAlign='Right' format='C2' width=90></e-column>
+      <e-column field='dateIssued' headerText='Date Issued' width=120></e-column>
+      <e-column field='disbursementNumber' headerText='Disbursement Number' width=120></e-column>
+      <e-column field='payee' headerText='Payee' width=120></e-column>
+     
+    </e-columns>
+
+    <ng-template #editSettingsTemplate let-data>
+      <div class="p-2 bg-light border">Wire Details</div>
+     
+      <div ngForm #orderForm="ngForm">
+          <div class="form-row">
+              <div class="form-group ">
+                  <div class="e-float-input e-control-wrapper" >
+                      <input [(ngModel)]="orderData.disbursementNumber" required id="disbursementNumber" name="disbursementNumber" disabled type="text" >
+                      <span class="e-float-line"></span>
+                      <label class="e-float-text e-label-top" for="disbursementNumber"> Disbursement NumberD</label>
+                  </div>
+                  
+              </div>
+
+              <div class="form-group  ">
+                <div class="e-float-input e-control-wrapper" >
+                    <input [(ngModel)]="orderData.amount" required id="amount" name="amount" disabled type="text" >
+                    <span class="e-float-line"></span>
+                    <label class="e-float-text e-label-top" for="amount"> Amount</label>
+                </div>
+                
+            </div>
+            <div class="form-group  ">
+              <div class="e-float-input e-control-wrapper" >
+                  <input [(ngModel)]="orderData.dateIssued" required id="dateIssued" name="dateIssued" disabled type="text" >
+                  <span class="e-float-line"></span>
+                  <label class="e-float-text e-label-top" for="dateIssued"> Date Issued</label>
+              </div>
+              
+          </div>
+ 
+        </div> 
+        <!--WIRE INSTRUCTIONS-->
+        <div class="p-2 bg-light border">Wire Instructions</div>
+        <div class="Form-row">
+          <div class="form-group col-sm-6 ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.sendToName" required id="sendToName" name="sendToName"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="sendToName"> Send To</label>
+            </div>
+          </div>
+          <div class="form-group col-sm-6 ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.address1" required id="address1" name="address1"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="address1"> Address line one</label>
+            </div>
+          </div>
+        </div>
+        <div class="Form-row">
+          <p>next row</p>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.address2"  id="address2" name="address2"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="address2"> Address line two</label>
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.city"  id="city" name="city"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="city"> City</label>
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.state"  id="state" name="state"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="state"> State</label>
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.zipCode"  id="zipCode" name="zipCode"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="zipCode"> Zip Code</label>
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.abaNumber"  id="abaNumber" name="abaNumber"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="abaNumber"> ABA Number</label>
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.accountNumber"  id="accountNumber" name="accountNumber"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="accountNumber"> Account Number</label>
+            </div>
+          </div>
+          <div class="form-group ">
+            <div class="e-float-input e-control-wrapper" >
+                <input [(ngModel)]="orderData.wireInstruction.reference"  id="reference" name="reference"  type="text" >
+                <span class="e-float-line"></span>
+                <label class="e-float-text e-label-top" for="reference"> Reference</label>
+            </div>
+          </div>
+        </div>
+      </div>
+          </ng-template>
+
+    
+      </ejs-grid>
+
+   
+ 
